@@ -56,7 +56,7 @@ Clone this repository to your desired folder:
 
 ```sh
   cd my-folder
-  git clone https://github.com/PrantoshB/vet-clinic.git
+  git clone https://github.com/lengushuru/Vet-Clinic-2.git
   cd vet-clinic
 ```
 
