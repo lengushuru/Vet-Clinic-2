@@ -28,10 +28,25 @@ update animals set species_id = case
   else (select id from species where name = 'Pokemon')
 end;
 
-update animals set owner_id = case
-  when name = 'Agumon' then (select id from owners where full_name = 'Sam Smith')
-  when name = 'Pikachu' or name = 'Gabumon'  then (select id from owners where full_name = 'Jesnnifer Orwell')
-  when name = 'Plantmon' then (select id from owners where full_name = 'Bob')
-  when name = 'Charmander' or name = 'Squirtle' or name = 'Blossom' then (select id from owners where full_name = 'Melody Pond')
-  when name = 'Angemon' or name = 'Boarmon' then (select id from owners where full_name = 'Dean Winchester')
-  end;
+BEGIN;
+UPDATE animals
+SET owner_id = owners.id
+FROM owners
+WHERE animals.name = 'Agumon' AND owners.full_name = 'Sam Smith';
+UPDATE animals
+SET owner_id = owners.id
+FROM owners
+WHERE animals.name IN ('Gabumon', 'Pikachu') AND owners.full_name = 'Jennifer Orwell';
+UPDATE animals
+SET owner_id = owners.id
+FROM owners
+WHERE animals.name IN ('Charmander', 'Squirtle', 'Blossom') AND owners.full_name = 'Melody Pond';
+UPDATE animals
+SET owner_id = owners.id
+FROM owners
+WHERE animals.name IN ('Angemon', 'Boarmon') AND owners.full_name = 'Dean Winchester';
+UPDATE animals
+SET owner_id = owners.id
+FROM owners
+WHERE animals.name IN ('Devimon', 'Plantmon') AND owners.full_name = 'Bob';
+COMMIT;
