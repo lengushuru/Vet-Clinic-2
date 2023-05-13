@@ -1,5 +1,3 @@
-/*Queries that provide answers to the questions FROM all projects.*/
-
 SELECT * FROM animals WHERE name LIKE '%mon';
 SELECT * FROM animals WHERE neutered = true;
 SELECT name FROM animals WHERE neutered = true AND escape_attempts < 3;
@@ -10,30 +8,26 @@ SELECT name, escape_attempts FROM animals WHERE weight_kg > 10.5;
 SELECT * FROM animals WHERE name != 'Gabumon';
 
 BEGIN;
-UPDATE animals set species = 'unspecified';
-SELECT * FROM animals;
+update animals set species = 'unspecified';
+select * from animals;
 rollback;
-SELECT * FROM animals;
+select * from animals;
 
 UPDATE animals set species = 'digimon' where name like '%mon';
-SELECT * FROM animals;
-UPDATE animals set species = 'pokemon' where species = '';
-SELECT * FROM animals;
+select * from animals;
+update animals set species = 'pokemon' where species = '';
+select * from animals;
 
 BEGIN;
-delete FROM animals;
-SELECT * FROM animals;
+delete from animals;
 ROLLBACK;
-SELECT * FROM animals;
+select * from animals;
 
 BEGIN;
 DELETE FROM animals WHERE date_of_birth > '2022-01-01';
-SELECT * FROM animals;
 SAVEPOINT SP1;
 UPDATE animals SET weight_kg = weight_kg * -1;
-SELECT * FROM animals;
 ROLLBACK TO SP1;
-SELECT * FROM animals;
 UPDATE animals SET weight_kg = weight_kg * -1 WHERE weight_kg < 0;
 COMMIT;
 
@@ -55,3 +49,39 @@ SELECT species, AVG(escape_attempts)
 FROM animals
 WHERE date_of_birth >= '1990-01-01' AND date_of_birth <= '2000-12-31'
 GROUP BY species;
+
+SELECT name FROM animals
+JOIN owners ON animals.owner_id = owners.id
+WHERE owners.full_name = 'Melody Pond';
+
+SELECT animals.name FROM animals
+JOIN species ON animals.species_id = species.id
+WHERE species.name = 'Pokemon';
+
+
+SELECT owners.full_name, animals.name
+FROM owners
+LEFT JOIN animals ON owners.id = animals.owner_id;
+
+SELECT species.name, COUNT(animals.id) as count
+FROM species
+LEFT JOIN animals ON species.id = animals.species_id
+GROUP BY species.id;
+
+SELECT animals.name
+FROM animals
+JOIN species ON animals.species_id = species.id
+JOIN owners ON animals.owner_id = owners.id
+WHERE species.name = 'Digimon' AND owners.full_name = 'Jennifer Orwell';
+
+SELECT animals.name
+FROM animals
+JOIN owners ON animals.owner_id = owners.id
+WHERE escape_attempts = 0 AND owners.full_name = 'Dean Winchester';
+
+SELECT owners.full_name, COUNT(animals.id) as count
+FROM owners
+LEFT JOIN animals ON owners.id = animals.owner_id
+GROUP BY owners.id
+ORDER BY count DESC
+LIMIT 1;
