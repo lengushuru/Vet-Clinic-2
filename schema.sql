@@ -11,7 +11,6 @@ CREATE TABLE animals (
 
 ALTER TABLE animals ADD COLUMN species VARCHAR(50);
 
-<<<<<<< HEAD
 CREATE TABLE vets (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255),
@@ -35,7 +34,6 @@ CREATE TABLE visits (
     FOREIGN KEY (vet_id) REFERENCES vets(id) ON DELETE CASCADE,
     PRIMARY KEY (animals_id, vet_id, visits_date)
 );
-=======
 CREATE TABLE owners (
     id BIGSERIAL primary key, 
     full_name varchar(255), 
@@ -54,4 +52,18 @@ ALTER TABLE animals ADD FOREIGN key(species_id) REFERENCES species(id);
 ALTER TABLE animals ADD owner_id INT;
 
 ALTER TABLE animals ADD FOREIGN key(owner_id) REFERENCES owners(id);
->>>>>>> dev
+
+create table vets (id serial primary key, name varchar(255), age integer, date_of_graduation date);
+
+create table specializations (
+    vet_id integer references vets(id),
+    species_id integer references species(id),
+    primary key(vet_id, species_id)
+);
+
+create table visits (
+    animal_id integer references animals(id),
+    vet_id integer references vets(id),
+    date_of_visit date,
+    primary key(animal_id, vet_id, date_of_visit)
+);
