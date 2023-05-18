@@ -36,3 +36,18 @@ treatment_id INT,
 CONSTRAINT FK_invoice FOREIGN KEY (invoice_id) REFERENCES invoices (id),
 CONSTRAINT FK_treatment FOREIGN KEY (treatment_id) REFERENCES treatments (id)
 );
+
+
+CREATE TABLE treatments_histories (
+  treatment_id INT,
+  medical_history_id INT,
+  PRIMARY KEY (treatment_id, medical_history_id),
+  CONSTRAINT FK_treatment FOREIGN KEY (treatment_id) REFERENCES treatments (id) ON DELETE CASCADE,
+  CONSTRAINT FK_medical_history FOREIGN KEY (medical_history_id) REFERENCES medical_histories(id) ON DELETE CASCADE
+);
+CREATE INDEX patientIdndex ON medical_histories (patient_id);
+CREATE INDEX invoiceIndex ON invoices (medical_history_id);
+CREATE INDEX invoiceIdIndex ON invoices_items(invoice_id);
+CREATE INDEX treatmentIdIndex ON invoices_items(treatment_id);
+CREATE INDEX treatmentIdIndex ON treatments_histories(treatment_id);
+CREATE INDEX medical_historyIndex ON treatments_histories(medical_history_id);
