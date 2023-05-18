@@ -56,9 +56,9 @@ After you're finished please remove all the comments and instructions!
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [Game Boss] <a name="about-project"></a>
+# 📖 [Hospital] <a name="about-project"></a>
 
-**Vet_clinic Databas** is database for storing information about animals, owners, vets, visits, and procedures in a vet clinic..
+**Hospital Database** is database for storing information about related with Hospital with update, delete and Edit..
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
@@ -77,8 +77,8 @@ After you're finished please remove all the comments and instructions!
 
 
 - **Vet_clinic Database**
-- **Animals Table**
 - **Database performance audit**
+- **Creation Of table**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -116,7 +116,7 @@ Example command:
 Clone this repository to your desired folder by:
 
 ```
-git clone https://github.com/byiringiroscar/microverse_database_tasks
+git clone https://github.com/lengushuru/Vet-Clinic-2
 ```
 
 <!--
@@ -134,7 +134,7 @@ Example commands:
 Install this project with: 
 
 ```
-cd microverse_database_tasks
+cd Vet-Clinic-2
 ```
 
 <!--
@@ -187,6 +187,7 @@ Example command:
 
 
 - [ ] **[Deploy database]**
+- [ ] **[Integrate Database On different Platform]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
